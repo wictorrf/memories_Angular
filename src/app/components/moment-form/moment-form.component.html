@@ -1,0 +1,28 @@
+<!-- //formGroup é para o angular mapear os inputs e em seguida conseguir disparar as validacoes
+// #formDir declara qual ou onde é o formulario -->
+
+<form (ngSubmit)="submit()" [formGroup]="momentForm" #formDir="ngForm">
+    <div class="form-group">
+        <label for="title">Titulo:</label>
+        <input type="text" placeholder="Coloque um Titulo" formControlName="title" required>
+        <div *ngIf="title.invalid && formDir.submitted" class="validation-error">
+             <p *ngIf="title.errors?.['required']">O titulo é obrigatório.</p>
+              <!-- o title.erros?.['required'] é caso tenha que tratar varios tipos de erros
+            exemplo: <p ngIf="title.maxlength?.['required']">O titulo é obrigatório.</p>
+            esse erro controla a quantidade maxima de caracteres que pode ter;
+            -->
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="description">Descrição:</label>
+        <textarea required placeholder="O que aconteceu lá?" formControlName="description"></textarea>
+        <div *ngIf="description.invalid && formDir.submitted" class="validation-error">
+            <p *ngIf="description.errors?.['required']">A Descrição é obrigatória.</p>
+       </div>
+    </div>
+    <div class="form-group">
+        <label for="image">Coloque a foto que mais marcou:</label>
+        <input type="file">
+    </div>
+    <input type="submit" value="{{btnText}}">
+</form>
